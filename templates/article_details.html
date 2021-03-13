@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}
+    Blog posts
+{% endblock %}
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <li>{{ post.author.first_name }} {{ post.author.last_name }} <small><a href="{% url 'update_post' post.pk %}">(edit)</a></small>  </li><br><hr>
+            {{ post.body }}<br>
+    <a href="{% url 'home' %}" class="btn btn-success"> home page</a>
+{% endblock %}
