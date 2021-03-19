@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,16 +21,34 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% if name_menu %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false">categories <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    {% for item in name_menu %}
+                        <a href="{% url 'category' item|slugify %}" class="dropdown-item"> {{ item }} </a>
+                    {% endfor %}
+                </ul>
+            </li>
+
+        {% endif %}
         <ul class="navbar-nav mr-auto">
+
             {% if user.is_authenticated %}
+
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'add_post' %}">Add Post</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'add_category' %}">add category</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'category_list' %}">category list</a>
                 </li>
 
             {% else %}

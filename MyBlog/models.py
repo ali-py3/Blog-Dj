@@ -3,7 +3,8 @@ from django.db import models
 # Create your models here.
 from django.contrib.auth.models import User
 from django.urls import reverse
-from datetime import datetime,date
+from datetime import datetime, date
+
 
 class Category(models.Model):
     name = models.CharField(max_length=250)
@@ -23,7 +24,6 @@ class Post(models.Model):
     body = models.TextField()
     post_date = models.DateField(auto_now_add=True)
     category = models.CharField(max_length=260, default='open')
-
 
     def __str__(self):
         return self.title + ' | ' + str(self.author)

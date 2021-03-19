@@ -3,11 +3,13 @@
 {% block content %}
     {% if user.is_authenticated %}
         <h1>Update Blog Post</h1>
-        <div class="form-group">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-info">Update</button>
-        </div>
+        <form method="post">
+            <div class="form-group">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-info">update</button>
+            </div>
+        </form>
     {% else %}
         <h1>Oops</h1>
     {% endif %}

@@ -12,12 +12,35 @@ from .forms import PostForm, EditForm
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
+    name = Category.objects.all()
     ordering = ['-id']
+
+    def get_context_data(self, *args, **kwargs):
+        name_menu = Category.objects.all()
+        context = super(HomeView, self).get_context_data(*args, **kwargs)
+        context["name_menu"] = name_menu
+        return context
+
+
+def CategoryListView(request):
+    category_list_posts = Category.objects.all()
+    return render(request, 'category_list.html',{'category_list_posts': category_list_posts})
+
+
+def CategoryView(request, name):
+    category_posts = Post.objects.filter(category=name.replace('-', ' '))
+    return render(request, 'category.html', {'name': name.replace('-', ' '), 'category_posts': category_posts})
 
 
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'article_details.html'
+
+    def get_context_data(self, *args, **kwargs):
+        name_menu = Category.objects.all()
+        context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
+        context["name_menu"] = name_menu
+        return context
 
 
 class AddPostView(CreateView):
@@ -25,6 +48,7 @@ class AddPostView(CreateView):
     form_class = PostForm
     template_name = 'add_post.html'
     # fields = ('title', 'title_tag', 'author', 'body')
+
 
 class AddCategoryView(CreateView):
     model = Category
@@ -44,4 +68,3 @@ class DeletePostView(DeleteView):
     model = Post
     template_name = 'Delete_post.html'
     success_url = reverse_lazy('home')
-
