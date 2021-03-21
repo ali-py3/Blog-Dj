@@ -10,9 +10,11 @@
                 - {{ post.author.first_name }}-{{ post.author.last_name }}
                 <small>
 
-                    {% if user.is_superuser %}
-                        <a href="{% url 'update_post' post.pk %}">(edit)</a>
-                        <a href="{% url 'delete_post' post.pk %}">(rm)</a>
+                    {% if user.is_authenticated %}
+                        {% if user.id == post.author.id %}
+                            <a href="{% url 'update_post' post.pk %}">(edit)</a>
+                            <a href="{% url 'delete_post' post.pk %}">(rm)</a>
+                        {% endif %}
                     {% endif %}
 
 

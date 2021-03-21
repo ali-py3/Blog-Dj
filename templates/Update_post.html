@@ -2,15 +2,18 @@
 {% load static %}
 {% block content %}
     {% if user.is_authenticated %}
-        <h1>Update Blog Post</h1>
-        <form method="post">
-            <div class="form-group">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-info">update</button>
-            </div>
-        </form>
-    {% else %}
-        <h1>Oops</h1>
+        {% if user.is_authenticated %}
+
+            <h1>Update Blog Post</h1>
+            <form method="post">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-info">update</button>
+                </div>
+            </form>
+        {% else %}
+            you are not allow
+        {% endif %}
     {% endif %}
 {% endblock %}
