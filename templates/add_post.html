@@ -5,6 +5,7 @@
         <h1>ADD Blog Post</h1>
         <form method="post">
             {% csrf_token %}
+            {{ form.media }}
             {{ form.as_p }}
             <button class="btn btn-info">Post</button>
         </form>

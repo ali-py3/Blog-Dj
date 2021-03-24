@@ -20,7 +20,7 @@
 
                 </small>
             </li>
-            {{ post.body | truncatewords:10 }}
+            {{ post.body | truncatewords:10 |safe}}
 
 
         {% endfor %}
