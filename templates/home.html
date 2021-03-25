@@ -16,15 +16,10 @@
                             <a href="{% url 'delete_post' post.pk %}">(rm)</a>
                         {% endif %}
                     {% endif %}
-
-
                 </small>
             </li>
-            {{ post.body | truncatewords:10 |safe}}
-
-
+            {{ post.snippet }}
         {% endfor %}
-
     </ul>
 
 {% endblock %}
