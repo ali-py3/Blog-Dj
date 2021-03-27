@@ -24,8 +24,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = RichTextField(blank=True, null=True)
     post_date = models.DateField(auto_now_add=True)
-    category = models.ManyToManyField(Category, blank=True)
-    snippet = models.CharField(max_length=260)
+    category = models.CharField(max_length=260, default=None)
+    snippet = models.CharField(max_length=260, default='for Snippet')
     likes = models.ManyToManyField(User, related_name='blog_post')
 
     def total_likes(self):

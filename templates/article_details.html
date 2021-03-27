@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
     current user: {{ user.id }}
-    <h1>{{ post.title }} - {{ post.author.id }}</h1>
+    <h1>{{ post.title }}</h1>
     <li>{{ post.author.first_name }}
         {{ post.author.last_name }}
         - {{ post.post_date }} <small>
@@ -16,14 +16,22 @@
             {% endif %}
         </small></li><br>
     <hr>
-    {{ post.body }}<br>
+    {{ post.body|safe }}<br>
     <a href="{% url 'home' %}" class="btn btn-success"> home page</a>
     <br>
     <hr>
     <form action="{% url "like_post" post.pk %}" method="post">
         {% csrf_token %}
-        <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-primary btn-sm">
-            Like - {{ total_likes }}
-        </button>
+        {% if liked %}
+            <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm">
+                Un Like
+            </button>
+        {% else %}
+
+            <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-primary btn-sm">
+                Like
+            </button>
+        {% endif %}
+        - {{ total_likes }}
     </form>
 {% endblock %}
