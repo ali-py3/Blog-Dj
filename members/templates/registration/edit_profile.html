@@ -2,6 +2,8 @@
 {% load static %}
 {% block title %}Edit Profile{% endblock %}
 {% block content %}
+    {{ user.profile.bio }}
+    <br>
     <h1>login</h1>
     <form method="post">
     {% csrf_token %}
