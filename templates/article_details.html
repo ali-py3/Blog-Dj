@@ -16,6 +16,9 @@
             {% endif %}
         </small></li><br>
     <hr>
+    {% if post.image %}
+        <img src="{{ post.image.url }}" style="height: 150px;width: 150px">
+    {% endif %}
     {{ post.body|safe }}<br>
     <a href="{% url 'home' %}" class="btn btn-success"> home page</a>
     <br>
