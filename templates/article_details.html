@@ -37,4 +37,13 @@
         {% endif %}
         - {{ total_likes }}
     </form>
+    <div class="card" style="width: 18rem;">
+    {% if post.author.profile.profile_pic %}
+        <img src="{{ post.author.profile.profile_pic.url }}" class="card-img-top" alt="...">
+    {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">{{ post.author.profile.bio }}</p>
+        </div>
+    </div>
 {% endblock %}
