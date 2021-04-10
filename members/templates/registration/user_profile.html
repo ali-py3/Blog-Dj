@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1>User Profile</h1>
+    {{ page_user }}
+    <div class="card" style="width: 18rem;">
+        {% if page_user.profile_pic %}
+            <img src="{{ page_user.profile_pic.url }}" class="card-img-top" alt="...">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">{{ page_user.profile.bio }}</p>
+
+        </div>
+    </div>
+{% endblock %}
+

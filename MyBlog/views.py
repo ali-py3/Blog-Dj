@@ -1,13 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy , reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Category
+from .models import Post, Category, Profile
 from .forms import PostForm, EditForm
 from django.http import HttpResponseRedirect
 
 # Create your views here.
 # def home(request):
 #     return render(request,'home.html',{})
+
+
 
 def LikeView(request, pk):
     post = get_object_or_404(Post,id = request.POST.get('post_id'))

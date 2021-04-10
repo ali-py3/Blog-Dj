@@ -7,7 +7,8 @@
     <h1>{{ post.title }}</h1>
     <li>{{ post.author.first_name }}
         {{ post.author.last_name }}
-        - {{ post.post_date }} <small>
+        - {{ post.post_date }}
+        <a href="{% url 'show_profile' post.author.profile.id %}">profile</a><small>
             {% if user.is_authenticated %}
                 {% if user.id == post.author.id %}
                     <a href="{% url 'update_post' post.pk %}">(edit)</a>
@@ -44,6 +45,7 @@
         <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">{{ post.author.profile.bio }}</p>
+
         </div>
     </div>
 {% endblock %}
