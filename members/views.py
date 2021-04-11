@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView, CreateView
 from django.urls import reverse_lazy
 from .forms import SignUpForm, EditProfileForm, PasswordsChangingform
 from django.contrib.auth.views import PasswordChangeView
@@ -10,6 +10,23 @@ from MyBlog.models import Profile
 
 
 # Create your views here.
+
+class CreateProfilePage(CreateView):
+    model = Profile
+    # form_class = ProfilePageFormView
+    template_name = 'registration/create_user_profile.html'
+    fields = '__all__'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class EditProfilePageView(generic.UpdateView):
+    model = Profile
+    template_name = 'registration/edite_profile_page_view.html'
+    fields = ['bio' ,'profile_pic', 'instagram_url', 'twitter_url' ,'facebook_url']
+    success_url = reverse_lazy('home')
+
 
 class ShowProfilePageView(DetailView):
     model = Profile
