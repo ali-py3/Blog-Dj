@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1>ADD Comment</h1>
+    <form method="post" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-info">Add Comment</button>
+    </form>
+{% endblock %}

@@ -24,6 +24,19 @@
     <a href="{% url 'home' %}" class="btn btn-success"> home page</a>
     <br>
     <hr>
+    <h2>Comments</h2>
+    {% if not post.comments.all %}
+        no comment yet...<a href="{% url 'add_comment' post.pk %}"> add comments</a>
+    {% else %}
+        <a href="{% url 'add_comment' post.pk %}"> add comments</a><br/><br>
+        {% for comment in post.comments.all %}
+        <strong>{{ comment.name }} - {{ comment.date_added }}</strong><br/>
+        {{ comment.body }}
+            <br/><br/>
+        {% endfor %}
+
+    {% endif %}
+    <br><hr>
     <form action="{% url "like_post" post.pk %}" method="post">
         {% csrf_token %}
         {% if liked %}
@@ -48,4 +61,6 @@
 
         </div>
     </div>
+    <hr>
+
 {% endblock %}
